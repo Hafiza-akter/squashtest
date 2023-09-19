@@ -34,8 +34,21 @@ class AirShoppingController extends Controller
             $cars = array("Volvo", "BMW", "Toyota");
             echo "I like " . $cars[0] . ", " . $cars[1] . " and " . $cars[2] . ".";
 
+<<<<<<< HEAD
             $cars = array("Volvo", "BMW", "Toyota");
             echo "I like " . $cars[0] . ", " . $cars[1] . " and " . $cars[2] . ".";
+=======
+            $bill_counts = DB::table($charge_table)
+            ->select( DB::raw('DATE(created_at) as date'), DB::raw('SUM(price) as tot_rev'), DB::raw('COUNT( msisdn) as count'))
+            ->whereIn('msisdn', array_unique($subscriber_msisdns))
+            ->where('created_at', '>=', $end_date_plus_one)
+            ->where('created_at', '<=', $till_date_minus_one)
+            ->where('status', 1)
+            ->where('operator', $operator_code)
+            ->Where('service', $service)
+            ->groupBy('date') 
+            ->get();
+>>>>>>> 428c6fa46141a7cf7d77911541ea252eff464b66
 
 
             return response()->json($response, $statusCode);
